@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class SearchBusInfo extends Fragment {
+    TextView fromUserData, toUserData;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +62,23 @@ public class SearchBusInfo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_bus_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_bus_info, container, false);
+        fromUserData = view.findViewById(R.id.from_user_data);
+        toUserData = view.findViewById(R.id.to_user_data);
+
+        fromUserData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"From User Data",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        toUserData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"To User Data",Toast.LENGTH_SHORT).show();
+            }
+        });
+        return view;
     }
 }
