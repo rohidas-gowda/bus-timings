@@ -1,5 +1,6 @@
 package com.andromojo.bustimings;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import android.widget.Toast;
  */
 public class SearchBusInfo extends Fragment {
     TextView fromUserData, toUserData;
+    Button searchBusData;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,6 +68,7 @@ public class SearchBusInfo extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search_bus_info, container, false);
         fromUserData = view.findViewById(R.id.from_user_data);
         toUserData = view.findViewById(R.id.to_user_data);
+        searchBusData = view.findViewById(R.id.search_bus_data);
 
         fromUserData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +83,15 @@ public class SearchBusInfo extends Fragment {
                 Toast.makeText(getActivity(),"To User Data",Toast.LENGTH_SHORT).show();
             }
         });
+
+        searchBusData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SearchBusDataActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 }

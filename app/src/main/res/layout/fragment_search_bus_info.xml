@@ -44,6 +44,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/from_user_data" />
 
             <Button
+                android:id="@+id/search_bus_data"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="20dp"

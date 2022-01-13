@@ -4,10 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/drawable/from_to_text_border.xml" value="0.2203125" />
+        <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/layout/activity_from_user_data.xml" value="0.20416666666666666" />
         <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
+        <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/layout/activity_search_bus.xml" value="0.20416666666666666" />
+        <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/layout/activity_search_bus_data.xml" value="0.20416666666666666" />
         <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/layout/fragment_bus_station_info.xml" value="0.27291666666666664" />
         <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/layout/fragment_reserved_services_info.xml" value="0.27291666666666664" />
         <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/layout/fragment_search_bus_info.xml" value="0.25" />
+        <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/layout/search_single_bus_data.xml" value="0.27291666666666664" />
       </map>
     </option>
   </component>
