@@ -73,14 +73,16 @@ public class SearchBusInfo extends Fragment {
         fromUserData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"From User Data",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), FromUserDataActivity.class);
+                startActivity(intent);
             }
         });
 
         toUserData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"To User Data",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ToUserDataActivity.class);
+                startActivity(intent);
             }
         });
 

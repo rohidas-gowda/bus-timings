@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class SearchBusDBHandler extends SQLiteOpenHelper {
@@ -113,4 +115,26 @@ public class SearchBusDBHandler extends SQLiteOpenHelper {
 
         return searchBusParametersArrayList;
     }
+
+    public Set<String> searchFromInfoFromDB() {
+        try {
+            createDatabase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        searchBusDataBase = this.getReadableDatabase();
+
+        Set<String> fromSearchDB = new HashSet<String>();
+
+        Cursor cursor = searchBusDataBase.rawQuery("select * from search_bus", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            fromSearchDB.add(cursor.getString(2));
+            cursor.moveToNext();
+        }
+            cursor.close();
+            searchBusDataBase.close();
+            return fromSearchDB;
+        }
 }
