@@ -95,7 +95,7 @@ public class SearchBusDBHandler extends SQLiteOpenHelper {
         super.close();
     }
 
-    public ArrayList<SearchBusParameters> searchBusInfoFromDB(){
+    public ArrayList<SearchBusParameters> searchBusInfoFromDB(String fromJourney, String toJourney){
         try{
             createDatabase();
         } catch (IOException e){
@@ -105,7 +105,7 @@ public class SearchBusDBHandler extends SQLiteOpenHelper {
         searchBusDataBase = this.getReadableDatabase();
 
         ArrayList<SearchBusParameters> searchBusParametersArrayList = new ArrayList<>();
-        Cursor cursor = searchBusDataBase.rawQuery("select * from search_bus", null);
+        Cursor cursor = searchBusDataBase.rawQuery("select * from search_bus where source = '"+fromJourney+"' and destination = '"+toJourney+"'", null);
         while (cursor.moveToNext()){
             SearchBusParameters searchBusParameters = new SearchBusParameters(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
             searchBusParametersArrayList.add(searchBusParameters);
@@ -130,11 +130,34 @@ public class SearchBusDBHandler extends SQLiteOpenHelper {
         Cursor cursor = searchBusDataBase.rawQuery("select * from search_bus", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            fromSearchDB.add(cursor.getString(2));
+            fromSearchDB.add(cursor.getString(1));
             cursor.moveToNext();
         }
             cursor.close();
             searchBusDataBase.close();
             return fromSearchDB;
         }
+
+
+    public Set<String> searchToInfoFromDB() {
+        try {
+            createDatabase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        searchBusDataBase = this.getReadableDatabase();
+
+        Set<String> toSearchDB = new HashSet<String>();
+
+        Cursor cursor = searchBusDataBase.rawQuery("select * from search_bus", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            toSearchDB.add(cursor.getString(2));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        searchBusDataBase.close();
+        return toSearchDB;
+    }
 }

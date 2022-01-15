@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -30,7 +33,45 @@ public class FromUserDataActivity extends AppCompatActivity {
         fromSearchArrayList = new ArrayList<String>(uniqueSearchFrom);
         fromSearchRecycler.setHasFixedSize(true);
         fromSearchRecycler.setLayoutManager(new LinearLayoutManager(this));
-        fromUserDataAdapter = new FromUserDataAdapter(fromSearchArrayList);
+
+        fromUserDataAdapter = new FromUserDataAdapter(fromSearchArrayList, new FromUserDataAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(String fromData) {
+                Intent fromIntent = new Intent();
+                fromIntent.putExtra("MSGFRM", fromData);
+                setResult(-1, fromIntent);
+                finish();
+            }
+        });
+
         fromSearchRecycler.setAdapter(fromUserDataAdapter);
+
+        fromSearchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                filter(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    private void filter(String searchText){
+        ArrayList<String> filteredData = new ArrayList<>();
+
+        for(String searchData : fromSearchArrayList){
+            if(searchData.toLowerCase().contains(searchText.toLowerCase())){
+                filteredData.add(searchData);
+            }
+        }
+        fromUserDataAdapter.filterList(filteredData);
     }
 }

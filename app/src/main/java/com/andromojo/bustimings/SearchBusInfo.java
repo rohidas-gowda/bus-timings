@@ -3,6 +3,10 @@ package com.andromojo.bustimings;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -20,7 +24,23 @@ import android.widget.Toast;
 public class SearchBusInfo extends Fragment {
     TextView fromUserData, toUserData;
     Button searchBusData;
+    String fromJourney, toJourney;
 
+    ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if(result.getResultCode() == -1){
+                String fromMessage = result.getData().getStringExtra("MSGFRM");
+                fromJourney = fromMessage;
+                fromUserData.setText(fromMessage);
+            }
+            if(result.getResultCode() == -2){
+                String toMessage = result.getData().getStringExtra("MSGTO");
+                toJourney = toMessage;
+                toUserData.setText(toMessage);
+            }
+        }
+    });
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -73,27 +93,47 @@ public class SearchBusInfo extends Fragment {
         fromUserData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FromUserDataActivity.class);
-                startActivity(intent);
+                Intent fromUserIntent = new Intent(getActivity(), FromUserDataActivity.class);
+                startForResult.launch(fromUserIntent);
             }
         });
 
+            validateToUserInput();
+            validateSearchBusData();
+
+
+
+        return view;
+    }
+
+    private void validateToUserInput() {
         toUserData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ToUserDataActivity.class);
-                startActivity(intent);
+                if (fromJourney != null){
+                    Intent toUserIntent = new Intent(getActivity(), ToUserDataActivity.class);
+                    startForResult.launch(toUserIntent);
+                } else {
+                    Toast.makeText(getActivity(),"Please Enter From Details!",Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
 
+    private void validateSearchBusData() {
         searchBusData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SearchBusDataActivity.class);
-                startActivity(intent);
+                if(fromJourney != null && fromJourney != toJourney && toJourney != null){
+                    Intent intent = new Intent(getActivity(), SearchBusDataActivity.class);
+                    intent.putExtra("FROMDATA", fromJourney);
+                    intent.putExtra("TODATA", toJourney);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(),"Please Enter Valid Details!",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
-
-        return view;
     }
 }

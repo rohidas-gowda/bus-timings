@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class TabLayoutAdapter extends FragmentStateAdapter {
-    private String[] tabItemNames = new String[]{"Search Bus", "Reserved", "Stations"};
+    private String[] tabItemNames = new String[]{"Search", "Reserved", "Stations"};
 
     public TabLayoutAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);

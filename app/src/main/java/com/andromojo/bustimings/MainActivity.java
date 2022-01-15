@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayoutAdapter tabLayoutAdapter;
     TabLayout tabLayout;
     ViewPager2 viewPager2;
-    private String[] tabItemNames = new String[]{"Search Bus", "Reserved", "Stations"};
+    private String[] tabItemNames = new String[]{"Search", "Reserved", "Stations"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
