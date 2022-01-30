@@ -1,12 +1,18 @@
 package com.andromojo.bustimings;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +20,11 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ReservedServicesInfo extends Fragment {
+    RecyclerView reservedForState;
+    List<String> stateName;
+    List<Integer> stateMap;
+    ReservedStateAdapter reservedStateAdapter;
+    private ReservedStateAdapter.StatesClickListener statesClickListener;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +70,46 @@ public class ReservedServicesInfo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reserved_services_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_reserved_services_info, container, false);
+        reservedForState = view.findViewById(R.id.reservedForState);
+
+        stateName = new ArrayList<>();
+        stateMap = new ArrayList<>();
+
+        stateName.add("Karnataka");
+        stateName.add("Andhra Pradesh");
+        stateName.add("Goa");
+        stateName.add("Kerala");
+        stateName.add("Maharashtra");
+        stateName.add("Tamil Nadu");
+        stateName.add("Telangana");
+
+        stateMap.add(R.drawable.ic_karnataka);
+        stateMap.add(R.drawable.ic_andhra_pradesh);
+        stateMap.add(R.drawable.ic_goa);
+        stateMap.add(R.drawable.ic_kerala);
+        stateMap.add(R.drawable.ic_maharashtra);
+        stateMap.add(R.drawable.ic_tamil_nadu);
+        stateMap.add(R.drawable.ic_telangana);
+
+        setStateClickListener();
+        reservedStateAdapter = new ReservedStateAdapter(stateName, stateMap, statesClickListener);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
+        reservedForState.setLayoutManager(gridLayoutManager);
+        reservedForState.setAdapter(reservedStateAdapter);
+
+        return view;
+    }
+
+    private void setStateClickListener() {
+        statesClickListener = new ReservedStateAdapter.StatesClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getContext(), ReservedStateDetailsActivity.class);
+                intent.putExtra("state_name", stateName.get(position));
+                startActivity(intent);
+            }
+        };
     }
 }

@@ -9,12 +9,16 @@
     <EditText
         android:id="@+id/search_from_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="48dp"
+        android:layout_margin="7dp"
+        android:padding="5dp"
+        android:background="@drawable/search_box_border"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_from_choice"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"/>
 
 </LinearLayout>

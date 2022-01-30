@@ -112,9 +112,10 @@ public class SearchBusInfo extends Fragment {
             public void onClick(View view) {
                 if (fromJourney != null){
                     Intent toUserIntent = new Intent(getActivity(), ToUserDataActivity.class);
+                    toUserIntent.putExtra("TOFILTER", fromJourney);
                     startForResult.launch(toUserIntent);
                 } else {
-                    Toast.makeText(getActivity(),"Please Enter From Details!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Please Enter \"From\"' Details First!",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -130,7 +131,7 @@ public class SearchBusInfo extends Fragment {
                     intent.putExtra("TODATA", toJourney);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getActivity(),"Please Enter Valid Details!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Please Enter Journey Details!",Toast.LENGTH_SHORT).show();
                 }
 
             }

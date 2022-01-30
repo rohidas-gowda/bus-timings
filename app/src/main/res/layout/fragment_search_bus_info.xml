@@ -10,10 +10,13 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         app:cardCornerRadius="7dp"
-        app:cardElevation="9dp">
+        app:cardElevation="12dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="#75c5e0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,6 +29,7 @@
                 android:layout_height="48dp"
                 android:layout_margin="20dp"
                 android:text="From"
+                android:padding="10dp"
                 android:background="@drawable/from_to_text_border"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -38,6 +42,7 @@
                 android:layout_height="48dp"
                 android:layout_margin="20dp"
                 android:text="To"
+                android:padding="10dp"
                 android:background="@drawable/from_to_text_border"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

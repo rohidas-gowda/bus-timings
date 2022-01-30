@@ -8,8 +8,9 @@ public class SearchBusParameters {
     private String service;
     private String timings;
     private String station;
+    private int stationSerialNo;
 
-    public SearchBusParameters(int id, String source, String destination, String via, String service, String timings, String station) {
+    public SearchBusParameters(int id, String source, String destination, String via, String service, String timings, String station, int stationSerialNo) {
         this.id = id;
         this.source = source;
         this.destination = destination;
@@ -17,6 +18,7 @@ public class SearchBusParameters {
         this.service = service;
         this.timings = timings;
         this.station = station;
+        this.stationSerialNo = stationSerialNo;
     }
 
     public int getId() {
@@ -73,5 +75,13 @@ public class SearchBusParameters {
 
     public void setStation(String station) {
         this.station = station;
+    }
+
+    public int getStationSerialNo() {
+        return stationSerialNo;
+    }
+
+    public void setStationSerialNo(int stationSerialNo) {
+        this.stationSerialNo = stationSerialNo;
     }
 }

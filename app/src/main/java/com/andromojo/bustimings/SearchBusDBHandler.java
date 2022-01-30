@@ -107,7 +107,7 @@ public class SearchBusDBHandler extends SQLiteOpenHelper {
         ArrayList<SearchBusParameters> searchBusParametersArrayList = new ArrayList<>();
         Cursor cursor = searchBusDataBase.rawQuery("select * from search_bus where source = '"+fromJourney+"' and destination = '"+toJourney+"'", null);
         while (cursor.moveToNext()){
-            SearchBusParameters searchBusParameters = new SearchBusParameters(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+            SearchBusParameters searchBusParameters = new SearchBusParameters(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7));
             searchBusParametersArrayList.add(searchBusParameters);
         }
         cursor.close();
@@ -139,7 +139,7 @@ public class SearchBusDBHandler extends SQLiteOpenHelper {
         }
 
 
-    public Set<String> searchToInfoFromDB() {
+    public Set<String> searchToInfoFromDB(String toSearchFilter) {
         try {
             createDatabase();
         } catch (IOException e) {
@@ -150,7 +150,7 @@ public class SearchBusDBHandler extends SQLiteOpenHelper {
 
         Set<String> toSearchDB = new HashSet<String>();
 
-        Cursor cursor = searchBusDataBase.rawQuery("select * from search_bus", null);
+        Cursor cursor = searchBusDataBase.rawQuery("select * from search_bus where source= '"+toSearchFilter+"'", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             toSearchDB.add(cursor.getString(2));

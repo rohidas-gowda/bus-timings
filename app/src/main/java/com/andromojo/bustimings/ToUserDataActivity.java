@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -19,17 +20,25 @@ public class ToUserDataActivity extends AppCompatActivity {
     private Set uniqueSearchTo;
     private ArrayList<String> toSearchArrayList;
     ToUserDataAdapter toUserDataAdapter;
+    String fromJourney;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_user_data);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            fromJourney = extras.getString("TOFILTER");
+        }
 
         SearchBusDBHandler searchBusDBHandler = new SearchBusDBHandler(this,null,null,1);
 
         toSearchRecycler = (RecyclerView) findViewById(R.id.search_to_choice);
         toSearchInput = (EditText) findViewById(R.id.search_to_input);
 
-        uniqueSearchTo = searchBusDBHandler.searchToInfoFromDB();
+        uniqueSearchTo = searchBusDBHandler.searchToInfoFromDB(fromJourney);
         toSearchArrayList = new ArrayList<String>(uniqueSearchTo);
 
         toSearchRecycler.setHasFixedSize(true);
@@ -46,6 +55,8 @@ public class ToUserDataActivity extends AppCompatActivity {
         });
 
         toSearchRecycler.setAdapter(toUserDataAdapter);
+
+        toSearchInput.requestFocus();
 
         toSearchInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,5 +85,15 @@ public class ToUserDataActivity extends AppCompatActivity {
             }
         }
         toUserDataAdapter.filterList(filteredData);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 }

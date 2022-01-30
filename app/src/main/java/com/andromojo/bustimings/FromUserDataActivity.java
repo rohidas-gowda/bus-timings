@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -23,6 +25,8 @@ public class FromUserDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_from_user_data);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SearchBusDBHandler searchBusDBHandler = new SearchBusDBHandler(this,null,null,1);
 
@@ -45,6 +49,8 @@ public class FromUserDataActivity extends AppCompatActivity {
         });
 
         fromSearchRecycler.setAdapter(fromUserDataAdapter);
+
+        fromSearchInput.requestFocus();
 
         fromSearchInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -73,5 +79,15 @@ public class FromUserDataActivity extends AppCompatActivity {
             }
         }
         fromUserDataAdapter.filterList(filteredData);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 }

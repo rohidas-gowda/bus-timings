@@ -6,10 +6,23 @@
     tools:context=".BusStationInfo">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Search Bus" />
+        android:layout_height="wrap_content"
+        android:text="AutoCompleteTextView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/busStationNameDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
+
 
 </FrameLayout>
