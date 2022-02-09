@@ -1,5 +1,6 @@
 package com.andromojo.bustimings;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,7 +21,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class BusStationInfo extends Fragment {
+    List<String> stationName;
     RecyclerView busStationNames;
+    private BusStationAdapter.StationClickListener stationClickListener;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -66,9 +74,30 @@ public class BusStationInfo extends Fragment {
         busStationNames = view.findViewById(R.id.busStationNameDisplay);
         busStationNames.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        String arr[] = {"C","C++","Java","C#","JavaScript","React","Vue","Angular","Electron","JQuery",".NET"};
-        //rcv.setAdapter(new myAdapter(arr));
+        stationName = new ArrayList<>();
+
+        stationName.add("KEMPE GOWDA BUS STATION MAJESTIC");
+        stationName.add("Andhra Pradesh");
+        stationName.add("Goa");
+        stationName.add("Kerala");
+        stationName.add("Maharashtra");
+        stationName.add("Tamil Nadu");
+        stationName.add("Telangana");
+
+        setStationClickListener();
+        busStationNames.setAdapter(new BusStationAdapter(stationName, stationClickListener));
 
         return view;
+    }
+
+    private void setStationClickListener() {
+        stationClickListener = new BusStationAdapter.StationClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getContext(), BusStationDataActivity.class);
+                intent.putExtra("station_name", stationName.get(position));
+                startActivity(intent);
+            }
+        };
     }
 }

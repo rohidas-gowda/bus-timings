@@ -10,20 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BusTimings">
         <activity
+            android:name=".BusStationDataActivity"
+            android:exported="false"
+            android:label="Station Info"/>
+        <activity
             android:name=".ReservedStateDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".SearchBusDataActivity"
-            android:label="Bus Details"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Bus Details" />
         <activity
             android:name=".ToUserDataActivity"
-            android:label="Search Destination"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Search Destination" />
         <activity
             android:name=".FromUserDataActivity"
-            android:label="Search Source"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Search Source" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

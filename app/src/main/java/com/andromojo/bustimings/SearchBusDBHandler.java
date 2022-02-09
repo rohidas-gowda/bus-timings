@@ -160,4 +160,25 @@ public class SearchBusDBHandler extends SQLiteOpenHelper {
         searchBusDataBase.close();
         return toSearchDB;
     }
+
+    public ArrayList<SearchBusParameters> searchBusStationInfoFromDB(String stationName){
+        try{
+            createDatabase();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        searchBusDataBase = this.getReadableDatabase();
+
+        ArrayList<SearchBusParameters> searchBusStationInfoArrayList = new ArrayList<>();
+        Cursor cursor = searchBusDataBase.rawQuery("select * from search_bus where station = '"+ stationName +"'", null);
+        while (cursor.moveToNext()){
+            SearchBusParameters searchBusParameters = new SearchBusParameters(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7));
+            searchBusStationInfoArrayList.add(searchBusParameters);
+        }
+        cursor.close();
+        searchBusDataBase.close();
+
+        return searchBusStationInfoArrayList;
+    }
 }

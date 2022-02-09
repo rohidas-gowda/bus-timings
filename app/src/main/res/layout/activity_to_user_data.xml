@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_margin="7dp"
+        android:hint="Search Destination"
         android:padding="5dp"
         android:background="@drawable/search_box_border"/>
 

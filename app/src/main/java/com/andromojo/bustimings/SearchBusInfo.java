@@ -9,12 +9,22 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
+import android.text.format.Time;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.StringTokenizer;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,12 +39,12 @@ public class SearchBusInfo extends Fragment {
     ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            if(result.getResultCode() == -1){
+            if (result.getResultCode() == -1) {
                 String fromMessage = result.getData().getStringExtra("MSGFRM");
                 fromJourney = fromMessage;
                 fromUserData.setText(fromMessage);
             }
-            if(result.getResultCode() == -2){
+            if (result.getResultCode() == -2) {
                 String toMessage = result.getData().getStringExtra("MSGTO");
                 toJourney = toMessage;
                 toUserData.setText(toMessage);
@@ -98,9 +108,8 @@ public class SearchBusInfo extends Fragment {
             }
         });
 
-            validateToUserInput();
-            validateSearchBusData();
-
+        validateToUserInput();
+        validateSearchBusData();
 
 
         return view;
@@ -110,12 +119,12 @@ public class SearchBusInfo extends Fragment {
         toUserData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (fromJourney != null){
+                if (fromJourney != null) {
                     Intent toUserIntent = new Intent(getActivity(), ToUserDataActivity.class);
                     toUserIntent.putExtra("TOFILTER", fromJourney);
                     startForResult.launch(toUserIntent);
                 } else {
-                    Toast.makeText(getActivity(),"Please Enter \"From\"' Details First!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Please Enter \"From\"' Details First!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -125,13 +134,13 @@ public class SearchBusInfo extends Fragment {
         searchBusData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(fromJourney != null && fromJourney != toJourney && toJourney != null){
+                if (fromJourney != null && fromJourney != toJourney && toJourney != null) {
                     Intent intent = new Intent(getActivity(), SearchBusDataActivity.class);
                     intent.putExtra("FROMDATA", fromJourney);
                     intent.putExtra("TODATA", toJourney);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getActivity(),"Please Enter Journey Details!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Please Enter Journey Details!", Toast.LENGTH_SHORT).show();
                 }
 
             }

@@ -1,5 +1,11 @@
 package com.andromojo.bustimings;
 
+import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ReservedStateParameters {
     private int reservedId;
     private String reservedSource;
@@ -11,8 +17,14 @@ public class ReservedStateParameters {
         this.reservedId = reservedId;
         this.reservedSource = reservedSource;
         this.reservedDestination = reservedDestination;
-        this.reservedTimings = reservedTimings;
         this.reservedStateName = reservedStateName;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
+            Date dateObj = sdf.parse(reservedTimings);
+            this.reservedTimings = new SimpleDateFormat("K:mm a").format(dateObj);
+        } catch (final ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getReservedId() {
