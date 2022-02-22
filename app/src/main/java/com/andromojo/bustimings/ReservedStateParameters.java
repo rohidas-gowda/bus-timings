@@ -21,7 +21,7 @@ public class ReservedStateParameters {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
             Date dateObj = sdf.parse(reservedTimings);
-            this.reservedTimings = new SimpleDateFormat("K:mm a").format(dateObj);
+            this.reservedTimings = new SimpleDateFormat("hh:mm a").format(dateObj);
         } catch (final ParseException e) {
             e.printStackTrace();
         }

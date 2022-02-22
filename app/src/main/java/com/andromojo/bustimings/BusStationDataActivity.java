@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class BusStationDataActivity extends AppCompatActivity {
     ArrayList<SearchBusParameters> searchBusStationInfoArrayList;
     String stationFilter;
-    RecyclerView rcv;
+    RecyclerView displayStationRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +33,10 @@ public class BusStationDataActivity extends AppCompatActivity {
 
         searchBusStationInfoArrayList = searchBusDBHandler.searchBusStationInfoFromDB(stationFilter);
 
-        rcv = (RecyclerView) findViewById(R.id.rcv);
-        rcv.setLayoutManager(new LinearLayoutManager(this));
+        displayStationRecyclerView = (RecyclerView) findViewById(R.id.displayStationRecyclerView);
+        displayStationRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        rcv.setAdapter(new BusStationDisplayAdapter(searchBusStationInfoArrayList));
+        displayStationRecyclerView.setAdapter(new BusStationDisplayAdapter(searchBusStationInfoArrayList));
     }
 
     @Override

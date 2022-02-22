@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15885416666666666" />
         <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/drawable/auto_text_complete_background.xml" value="0.2203125" />
         <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/drawable/from_to_text_border.xml" value="0.2203125" />
         <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/drawable/round_background.xml" value="0.2203125" />
@@ -25,6 +26,7 @@
         <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/layout/search_single_to_data.xml" value="0.20416666666666666" />
         <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/layout/single_bus_station_data.xml" value="0.5" />
         <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/layout/single_station_name.xml" value="0.33" />
+        <entry key="..\:/Rohidas Projects/Android Projects/Bus Timings/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15885416666666666" />
       </map>
     </option>
   </component>
